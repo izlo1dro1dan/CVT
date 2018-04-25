@@ -7,7 +7,6 @@ from sklearn import svm
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
-
 def extractingData():
 
     with open('dataset/annotation.txt', 'r') as f:
@@ -23,7 +22,6 @@ def extractingData():
             imagepath = os.path.join(root, file)
             if file.endswith('.jpg'):
                 img = cv2.imread(imagepath)
-
                 img2 = cv2.resize(img, (56, 56))
                 imagesSmall.append(img2)
                 images.append(img)
@@ -44,12 +42,9 @@ if __name__ == '__main__':
                                 _cellSize=(cell, cell),
                                 _nbins=nbin, _histogramNormType = 0, _gammaCorrection = True)
 
-    
     features = []
     for img in images:
         features.append(hog.compute(img).reshape(featureVector))
-
-
     X = np.asarray(features)
     y = np.asarray(labels)
 
@@ -63,18 +58,3 @@ if __name__ == '__main__':
 
     y_pred = clf.predict(X_test)
     print accuracy_score(y_test, y_pred)
-
-    
-
-
-
-
-        
-
-    
-
-
-
-            
-
-
